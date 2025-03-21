@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bootstrap Containers Demo</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: white;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    h2 {
+      font-family: 'Lucida Console', Courier New, monospace;
+      font-size: 50px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .dropdownlabel {
+      font-weight: 600;
+      margin-top: 15px;
+      display: block;
+      text-align: left;
+    }
+
+    .dropdown {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ced4da;
+    }
+
+    .calculates {
+      background-color: #343a40;
+      color: white;
+      padding: 10px 25px;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      margin-top: 15px;
+    }
+
+    .calculates:hover {
+      background-color: #0056b3;
+    }
+
+    .text {
+      font-size: 1.3rem;
+      font-weight: bold;
+      margin-top: 15px;
+    }
+
+    img {
+      border: 2px solid #dee2e6;
+      border-radius: 10px;
+      max-width: 100%;
+      height: auto;
+    }
+
+    .navbar-custom {
+      background-color: #343a40;
+      padding: 10px 0;
+    }
+
+    .navbar-custom .nav-link {
+      color: white;
+      margin-right: 15px;
+    }
+
+    .navbar-custom .nav-link:hover {
+      color: #ffc107;
+    }
+
+    .searchbar {
+      border-radius: 5px;
+      padding: 5px 10px;
+      border: 1px solid #ced4da;
+    }
+    .logo {
+      margin-top: 5px;
+      margin-right: 20px;
+      height: 50px;
+      width: 50px;
+    }
+
+    .same-size {
+        width: 100%;
+        max-width: 500px;
+        height: 400px;
+        border: 2px solid #dee2e6;
+        border-radius: 10px;
+}
+  </style>
+</head>
+<body>
+ <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container">
+        <img src="logo.jpeg" class="logo">         
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                   <li class="nav-item">
+                      <a class="nav-link link1" href="index.html">Home</a> 
+                   </li>
+                   <li class="nav-item">
+                      <a class="nav-link link1" href="trainschedule.html">Train Schedule</a> 
+                   </li>  
+                </ul>
+            </div>
+            <input type="text" placeholder="Search" class="searchbar">
+        </div>    
+    </nav>
+   <div class="container mt-4">
+  <div class="row align-items-start">
+    <div class="col-md-6 text-center">
+      <img src="map.jpg"  class="img-fluid mb-3 same-size">
+      <img src="map2.png" class="img-fluid same-size">
+    </div>
+
+    <div class="col-md-6 text-center">
+      <h2 style="font-family:Lucida Console, Courier New, monospace; font-size: 70px;">FAIR GUIDE</h2>
+      <label for="fromStation" class="dropdownlabel">LEAVING FROM: </label><br>
+      <select id="fromStation" class="dropdown">
+        <option value="Santolan">Santolan</option>
+        <option value="Katipunan">Katipunan </option>
+        <option value="Anonas">Anonas</option>
+        <option value="Araneta Center-Cubao">Araneta Center-Cubao</option>
+        <option value="Betty Go-Belmonte">Betty Go-Belmonte</option>
+        <option value="Gilmore">Gilmore</option>
+        <option value="J. Ruiz">J. Ruiz</option>
+        <option value="V. Mapa">V. Mapa</option>
+        <option value="Pureza">Pureza</option>
+        <option value="Legarda">Legarda</option>
+        <option value="Recto">Recto</option>
+      </select>
+
+      <br>
+
+      <label for="toStation" class="dropdownlabel">GOING TO: </label><br>
+      <select id="toStation" class="dropdown">
+        <option value="Santolan">Santolan</option>
+        <option value="Katipunan">Katipunan </option>
+        <option value="Anonas">Anonas</option>
+        <option value="Araneta Center-Cubao">Araneta Center-Cubao</option>
+        <option value="Betty Go-Belmonte">Betty Go-Belmonte</option>
+        <option value="Gilmore">Gilmore</option>
+        <option value="J. Ruiz">J. Ruiz</option>
+        <option value="V. Mapa">V. Mapa</option>
+        <option value="Pureza">Pureza</option>
+        <option value="Legarda">Legarda</option>
+        <option value="Recto">Recto</option>
+      </select>
+      <br><br>
+      <button onclick="calculatePrice()" class="calculates">Calculate Price</button>
+      <br><br>
+      <p class="text">Ticket Price: <span id="ticketPrice">₱0.00</span></p>
+    </div>
+  </div>
+</div>
+
+        <script>
+
+const stations = [
+    "Santolan", "Katipunan", "Anonas", "Araneta Center-Cubao", "Betty Go-Belmonte",
+    "Gilmore", "J. Ruiz", "V. Mapa", "Pureza", "Legarda",
+    "Recto",  
+];
+
+
+const baseFare = 20;
+const fareIncrement = 5;
+
+function calculatePrice() {
+    const fromStation = document.getElementById("fromStation").value;
+    const toStation = document.getElementById("toStation").value;
+
+    const fromIndex = stations.indexOf(fromStation);
+    const toIndex = stations.indexOf(toStation);
+
+    if (fromIndex === -1 || toIndex === -1 || fromIndex === toIndex || fromIndex > toIndex) {
+        alert("Invalid station selection.");
+        return;
+    }
+
+    const numStops = toIndex - fromIndex;
+    
+    const price = baseFare + (numStops * fareIncrement);
+
+    document.getElementById("ticketPrice").textContent = `₱${price.toFixed(2)}`;    
+}
+
+
+        </script>
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
